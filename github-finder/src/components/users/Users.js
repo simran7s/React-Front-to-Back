@@ -1,19 +1,28 @@
-import React, { Component } from 'react';
+import React from 'react';
 import UserItem from './UserItem';
+import Spinner from '../layout/Spinner';
+import PropTypes from 'prop-types';
 
-class Users extends Component {
-  render() {
+const Users = ({ users, loading }) => {
+  if (loading) {
+    return <Spinner />;
+  } else {
     return (
       <div style={userStyle}>
         {/* Change this.state to this.props to get state from props now */}
-        {this.props.users.map((user) => (
+        {users.map((user) => (
           // We need a key that is unique to each user when using map
           <UserItem key={user.id} user={user} />
         ))}
       </div>
     );
   }
-}
+};
+
+Users.propTypes = {
+  users: PropTypes.array.isRequired, //ptar
+  loading: PropTypes.bool.isRequired, //ptbr
+};
 
 const userStyle = {
   display: 'grid',
