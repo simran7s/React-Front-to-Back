@@ -15,7 +15,9 @@ class App extends Component {
     // While fetching data, setState of loading to true(for loading wheel to be called)
     this.setState({ loading: true });
 
-    const res = await axios.get('https://api.github.com/users');
+    const res = await axios.get(
+      `https://api.github.com/users?client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
+    );
 
     // After data is recieved, setState of users to data recieve and turn off the loading wheel
     this.setState({ users: res.data, loading: false });
