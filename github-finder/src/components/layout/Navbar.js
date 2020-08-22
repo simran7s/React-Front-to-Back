@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 // Instead of using props as the argument, just write the specific props
 const Navbar = ({ icon, title }) => {
@@ -8,6 +9,15 @@ const Navbar = ({ icon, title }) => {
       <h1>
         <i className={icon}></i> {title}
       </h1>
+      {/* We use link tags here instead of a tags bc link tags save state (Link from REACT ROUTER DOM*/}
+      <ul>
+        <li>
+          <Link to="/">Home</Link>
+        </li>
+        <li>
+          <Link to="/about">About</Link>
+        </li>
+      </ul>
     </nav>
   );
 };
