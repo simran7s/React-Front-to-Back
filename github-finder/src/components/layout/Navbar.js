@@ -7,7 +7,9 @@ const Navbar = ({ icon, title }) => {
   return (
     <nav className="navbar bg-primary">
       <h1>
-        <i className={icon}></i> {title}
+        <Link to="/">
+          <i className={icon}></i> {title}
+        </Link>
       </h1>
       {/* We use link tags here instead of a tags bc link tags save state (Link from REACT ROUTER DOM*/}
       <ul>
