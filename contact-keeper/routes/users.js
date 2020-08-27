@@ -58,11 +58,12 @@ router.post(
 
       jwt.sign(
         payload,
-        config.get('jwtSecret'),
+        config.get('jwtSecret'), //Get secret from config file
         {
-          expiresIn: 360000,
+          expiresIn: 360000, //That token expires in 360000 seconds, after which user will have to log back in
         },
         (err, token) => {
+          //callback
           if (err) throw err;
           res.json({ token });
         }
