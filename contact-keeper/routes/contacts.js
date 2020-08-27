@@ -21,24 +21,48 @@ router.get('/', auth, async (req, res) => {
   }
 });
 
-// @route   POST api/auth
-// @des     Auth user & get token
+// @route   POST api/contacts
+// @des     Add new contact
 // @access  private
-router.post('/', (req, res) => {
-  res.send('Add contact');
-});
+router.post(
+  '/',
+  [auth, [check('name', 'Enter Name').not().isEmpty()]],
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
 
-// @route   POST api/auth
+    const { name, email, phone, type } = req.body;
+
+    try {
+      const newContact = new Contact({
+        name,
+        email,
+        phone,
+        type,
+        user: req.user.id,
+      });
+      const contact = await newContact.save();
+      res.json(contact);
+    } catch (err) {
+      console.error(error.message);
+      res.status(500).send('Server Error');
+    }
+  }
+);
+
+// @route   PUT api/contact/:id
 // @des     Update contact
 // @access  private
 router.put('/:id', (req, res) => {
   res.send('Update contact');
 });
 
-// @route   POST api/auth
+// @route   DELETE api/contact:id
 // @des     Delete contact
 // @access  private
-router.put('/:id', (req, res) => {
+router.delete('/:id', (req, res) => {
   res.send('Delete contact');
 });
 
