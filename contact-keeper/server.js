@@ -6,7 +6,9 @@ const app = express();
 // Connect Database
 connectDB();
 
-// Mulitple things we can send but we will get doing res.json because we want to use this as an API
+// Init Middleware (bodyparser like)
+app.use(express.json({ extended: false }));
+
 app.get('/', (req, res) => {
   res.json({ msg: 'Welcome to the ContactKeeper API' });
 });
